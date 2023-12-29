@@ -8,7 +8,7 @@ namespace Snipping_OCR
 {
     public partial class Main : Form
     {
-
+        private Image snapImage;
         public Main()
         {
             InitializeComponent();
@@ -119,7 +119,7 @@ namespace Snipping_OCR
             var img = Clipboard.GetImage();
 
             if (img != null) {
-                sqPhoto.Image = img;
+                snapImage = img;
                 timeOCR_Start();
                 return;
             }
@@ -131,7 +131,7 @@ namespace Snipping_OCR
                 string ext = files[0].ToLower().Substring(files[0].Length - 3);
                 if (ImgAllow.Contains(ext))
                 {
-                    sqPhoto.Image = Image.FromFile(files[0]);
+                    snapImage = Image.FromFile(files[0]);
                     timeOCR_Start();
                 }
             }
@@ -148,7 +148,7 @@ namespace Snipping_OCR
             string ext = file.ToLower().Substring(file.Length - 3);
             if (ImgAllow.Contains(ext))
             {
-                sqPhoto.Image = Image.FromFile(file);
+                snapImage = Image.FromFile(file);
                 timeOCR_Start();
             }
         }
@@ -192,8 +192,7 @@ namespace Snipping_OCR
                 }
                 this.BeginInvoke(new Action(() =>
                 {
-                    if (!string.IsNullOrEmpty(txt) && txt != textOCR.Text) textOCR.Text = txt;
-                    textOCR.Cursor = Cursors.IBeam;
+                    Clipboard.SetText(txt);
                 }));
                 
             }).Start();
@@ -203,8 +202,7 @@ namespace Snipping_OCR
         /// Æô¶¯Ê¶±ð
         /// </summary>
         private void timeOCR_Start() {
-            textOCR.Cursor = Cursors.WaitCursor;
-            showFileOcr(sqPhoto.Image);
+            showFileOcr(snapImage);
         }
 
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
