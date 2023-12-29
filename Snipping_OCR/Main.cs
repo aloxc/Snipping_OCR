@@ -76,12 +76,13 @@ namespace Snipping_OCR
             Image img = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);
             Graphics g = Graphics.FromImage(img);
             g.CopyFromScreen(new Point(0, 0), new Point(0, 0), Screen.AllScreens[0].Bounds.Size);
-            */
+            
             ScreenBody body = new ScreenBody();
             //body.BackgroundImage = img;
             body.Show();
+            */
             //如果需要恢复代码，需要恢复下面被注释掉的代码
-            /*
+            
             var psi = new ProcessStartInfo()
             {
                 UseShellExecute = true,
@@ -92,8 +93,8 @@ namespace Snipping_OCR
             var snippingToolProcess = Process.GetProcessesByName("ScreenClippingHost")[0];
             snippingToolProcess.EnableRaisingEvents = true;
             snippingToolProcess.Exited += SnippingToolProcess_Exited;
-            */
-          
+            
+
         }
 
         /// <summary>
