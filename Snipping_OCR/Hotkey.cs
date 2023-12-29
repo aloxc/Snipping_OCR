@@ -79,6 +79,7 @@ namespace Snipping_OCR
     /// </summary>
     public enum HotkeyModifiers
     {
+        NONE = 0,
         MOD_ALT = 1,
         MOD_CONTROL,
         MOD_SHIFT = 4,

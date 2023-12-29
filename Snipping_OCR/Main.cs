@@ -34,7 +34,7 @@ namespace Snipping_OCR
             //×¢²áÈÈ¼ü Ctrl+ALT+A ½ØÍ¼
             try
             {
-                Hotkey.Regist(base.Handle, HotkeyModifiers.MOD_CONTROL_ALT, Keys.A, new Hotkey.HotKeyCallBackHanlder(StartCapture));
+                Hotkey.Regist(base.Handle, HotkeyModifiers.NONE, Keys.F1, new Hotkey.HotKeyCallBackHanlder(StartCapture));
             }
             catch
             {
