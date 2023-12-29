@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PaddleOCRSharp;
 
 namespace Snipping_OCR
 {
@@ -216,17 +217,12 @@ namespace Snipping_OCR
         // static Graphics gi;  
          Bitmap bmpAll;
         
-         string filename = "1.jpg";
          bool isOneDown = true;
-         Bitmap bm;
-        bool isDowned = false;
+         Bitmap ocrImage;
         public ScreenBody()
         {
             InitializeComponent();
         }
-
-        private Point mouseDownPoint;
-
         private void ScreenBody_Load(object sender, EventArgs e)
         {
             Size size = Screen.PrimaryScreen.Bounds.Size;
@@ -264,35 +260,36 @@ namespace Snipping_OCR
         {
             if (isMouseClick)
             {
-                // MessageBox.Show("放开后鼠标的位置："+MousePosition.X.ToString() + "" + MousePosition.Y.ToString());  
                 nowX = MousePosition.X + 1;
                 nowY = MousePosition.Y + 1;
-
-                //Image newImage = Image.FromFile("1.jpg");
                 Rectangle destRect = new Rectangle(x, y, nowX - x, nowY - y);
-                Bitmap bmp = new Bitmap(nowX - x, nowY - y);
-
-                bm = ((Bitmap)bmpAll).Clone(destRect, bmpAll.PixelFormat);
-
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-                saveFileDialog1.RestoreDirectory = true;
-                string filePath = null;
-                saveFileDialog1.Filter = "Image files (JPeg, Gif, Bmp, etc.)|*.jpg;*.jpeg;*.gif;*.bmp;*.tif; *.tiff; *.png|" +
-                "JPeg files (*.jpg;*.jpeg)|*.jpg;*.jpeg |GIF files (*.gif)|*.gif |BMP files (*.b" +
-                "mp)|*.bmp|Tiff files (*.tif;*.tiff)|*.tif;*.tiff|Png files (*.png)| *.png |All f" +
-                "iles (*.*)|*.*";
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    filePath = saveFileDialog1.FileName.ToString();
-                    bm.Save(filePath, ImageFormat.Jpeg);
-                }
-
-                bmpAll.Dispose();
-                isMouseClick = false;
-                this.Close();
-
+                ocrImage = ((Bitmap)bmpAll).Clone(destRect, bmpAll.PixelFormat);
+                ocr();
             }
         }
+        private void ocr()
+        {
+            var ocrResult = new OCRResult();
+            using PaddleOCREngine engine = new PaddleOCREngine(null, new OCRParameter());
+            ocrResult = engine.DetectText(ocrImage);
+            var txt = "";
+            if (ocrResult.TextBlocks.Count > 0)
+            {
+                foreach (var item in ocrResult.TextBlocks)
+                {
+                    txt += item.Text + "\r\n";
+                }
+            }
+            Clipboard.SetText(txt);
+
+  
+            ocrImage.Dispose();
+            bmpAll.Dispose();
+            g.Dispose();
+            isMouseClick = false;
+            this.Close();
+        }
+
 
         //鼠标移动，画框或者拖动
         private void ScreenBody_MouseMove(object sender, MouseEventArgs e)

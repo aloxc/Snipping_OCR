@@ -146,7 +146,7 @@ namespace Snipping_OCR
         /// Ö´ÐÐOCRÊ¶±ðÍ¼Æ¬
         /// </summary>
         /// <param name="imgfile"></param>
-        private void showFileOcr(Image imgfile)
+        public void showFileOcr(Image imgfile)
         {
             new Task(() =>
             {
