@@ -12,6 +12,8 @@ namespace Snipping_OCR
         public Main()
         {
             InitializeComponent();
+            base.Hide();
+            this.Visible = false;
         }
 
         /// <summary>
@@ -20,6 +22,7 @@ namespace Snipping_OCR
         /// <param name="m"></param>
         protected override void WndProc(ref Message m)
         {
+            base.Hide();
             base.WndProc(ref m);
             Hotkey.ProcessHotKey(m);
         }
@@ -34,6 +37,7 @@ namespace Snipping_OCR
             //注册热键 Ctrl+ALT+A 截图
             try
             {
+                
                 Hotkey.Regist(base.Handle, HotkeyModifiers.NONE, Keys.F1, new Hotkey.HotKeyCallBackHanlder(StartCapture));
             }
             catch
@@ -115,7 +119,7 @@ namespace Snipping_OCR
         private void ClipboardOCR()
         {
 
-            WindowsAPI.ShowWindow(this.Handle, 9);
+            //WindowsAPI.ShowWindow(this.Handle, 9);
             var img = Clipboard.GetImage();
 
             if (img != null) {
@@ -137,38 +141,7 @@ namespace Snipping_OCR
             }
         }
 
-        /// <summary>
-        /// 拖放图片
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void sqPhoto_DragDrop(object sender, DragEventArgs e)
-        {
-            string file = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString()!;
-            string ext = file.ToLower().Substring(file.Length - 3);
-            if (ImgAllow.Contains(ext))
-            {
-                snapImage = Image.FromFile(file);
-                timeOCR_Start();
-            }
-        }
-
-        /// <summary>
-        /// 允许拖放
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void sqPhoto_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.All;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
-        }
+  
 
         /// <summary>
         /// 执行OCR识别图片
@@ -207,7 +180,7 @@ namespace Snipping_OCR
 
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            WindowsAPI.ShowWindow(this.Handle, 9);
+            //WindowsAPI.ShowWindow(this.Handle, 9);
         }
 
         private void Main_SizeChanged(object sender, EventArgs e)
@@ -230,7 +203,7 @@ namespace Snipping_OCR
 
         private void 显示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WindowsAPI.ShowWindow(this.Handle, 9);
+            //WindowsAPI.ShowWindow(this.Handle, 9);
         }
 
         private void 开始截图ToolStripMenuItem_Click(object sender, EventArgs e)
