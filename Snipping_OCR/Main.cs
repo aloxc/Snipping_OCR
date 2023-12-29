@@ -9,6 +9,7 @@ namespace Snipping_OCR
     public partial class Main : Form
     {
         private Image snapImage;
+        private ScreenBody screenBody;
         public Main()
         {
             InitializeComponent();
@@ -37,8 +38,8 @@ namespace Snipping_OCR
             //注册热键 Ctrl+ALT+A 截图
             try
             {
-                
                 Hotkey.Regist(base.Handle, HotkeyModifiers.NONE, Keys.F1, new Hotkey.HotKeyCallBackHanlder(StartCapture));
+                
             }
             catch
             {
@@ -71,6 +72,13 @@ namespace Snipping_OCR
         /// </summary>
         private void StartCapture()
         {
+            Image img = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);
+            Graphics g = Graphics.FromImage(img);
+            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), Screen.AllScreens[0].Bounds.Size);
+            ScreenBody body = new ScreenBody();
+            body.BackgroundImage = img;
+            body.Show();
+            MessageBox.Show("aaa");
             //如果需要恢复代码，需要恢复下面被注释掉的代码
             /*
             var psi = new ProcessStartInfo()

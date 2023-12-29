@@ -28,10 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "ScreenBody";
+            SuspendLayout();
+            // 
+            // ScreenBody
+            // 
+            AutoScaleDimensions = new SizeF(11F, 24F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Name = "ScreenBody";
+            Text = "ScreenBody";
+            Load += ScreenBody_Load;
+            MouseDoubleClick += ScreenBody_MouseDoubleClick;
+            MouseDown += ScreenBody_MouseDown;
+            MouseMove += ScreenBody_MouseMove;
+            MouseUp += ScreenBody_MouseUp;
+            ResumeLayout(false);
         }
 
         #endregion
