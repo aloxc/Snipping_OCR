@@ -169,7 +169,7 @@ namespace Snipping_OCR
                         {
                             txt += list[i].Text + "\r\n";
                         }
-                        txt += list[list.Count -1];
+                        txt += list[list.Count -1].Text;
                     }
                 }
                 this.BeginInvoke(new Action(() =>
