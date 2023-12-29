@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace Snipping_OCR
 {
     public partial class ScreenBody : Form
     {
+        /*
         public ScreenBody()
         {
             InitializeComponent();
@@ -96,6 +98,24 @@ namespace Snipping_OCR
             {
                 isDowned = false;
                 RectReady = true;
+
+                Image memory = new Bitmap(Rect.Width, Rect.Height);
+                Graphics g = Graphics.FromImage(memory);
+                g.CopyFromScreen(Rect.X + 1, Rect.Y + 1, 0, 0, Rect.Size);
+                //Clipboard.SetImage(memory);
+                string filePath = null;
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.RestoreDirectory = true;
+                saveFileDialog1.Filter = "Image files (JPeg, Gif, Bmp, etc.)|*.jpg;*.jpeg;*.gif;*.bmp;*.tif; *.tiff; *.png|" +
+                "JPeg files (*.jpg;*.jpeg)|*.jpg;*.jpeg |GIF files (*.gif)|*.gif |BMP files (*.b" +
+                "mp)|*.bmp|Tiff files (*.tif;*.tiff)|*.tif;*.tiff|Png files (*.png)| *.png |All f" +
+                "iles (*.*)|*.*";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = saveFileDialog1.FileName.ToString();
+                    memory.Save(filePath, ImageFormat.Jpeg);
+                }
+                this.Close();
             }
         }
         //鼠标移动，画框或者拖动
@@ -183,6 +203,108 @@ namespace Snipping_OCR
             Painter.DrawRectangle(pen, Rect.X, Rect.Y, Rect.Width, Rect.Height);
             MainPainter.DrawImage(image, 0, 0);
             image.Dispose();
+        }*/
+
+         int x = 0;
+         int y = 0;
+         int nowX = 0;
+         int nowY = 0;
+         bool isMouseClick = false;
+         Graphics g;
+         int width = 0;
+         int height = 0;
+        // static Graphics gi;  
+         Bitmap bmpAll;
+        
+         string filename = "1.jpg";
+         bool isOneDown = true;
+         Bitmap bm;
+        bool isDowned = false;
+        public ScreenBody()
+        {
+            InitializeComponent();
+        }
+
+        private Point mouseDownPoint;
+
+        private void ScreenBody_Load(object sender, EventArgs e)
+        {
+            Size size = Screen.PrimaryScreen.Bounds.Size;
+            bmpAll = new Bitmap(size.Width, size.Height);
+            Graphics g = Graphics.FromImage(bmpAll);
+            g.CopyFromScreen(0, 0, 0, 0, size);
+
+            //注意以下顺序。  
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            this.ShowInTaskbar = false;
+            g = this.CreateGraphics();
+            this.Opacity = 0.1;
+        }
+        //双击保存
+        private void ScreenBody_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        //左击开始截图或移动，右击撤销
+        private void ScreenBody_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (isOneDown)
+            {
+                x = MousePosition.X;
+                y = MousePosition.Y;
+                isMouseClick = true;
+                isOneDown = false;
+            }
+        }
+
+        //左键放开，截图方框完成
+        private void ScreenBody_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (isMouseClick)
+            {
+                // MessageBox.Show("放开后鼠标的位置："+MousePosition.X.ToString() + "" + MousePosition.Y.ToString());  
+                nowX = MousePosition.X + 1;
+                nowY = MousePosition.Y + 1;
+
+                //Image newImage = Image.FromFile("1.jpg");
+                Rectangle destRect = new Rectangle(x, y, nowX - x, nowY - y);
+                Bitmap bmp = new Bitmap(nowX - x, nowY - y);
+
+                bm = ((Bitmap)bmpAll).Clone(destRect, bmpAll.PixelFormat);
+
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.RestoreDirectory = true;
+                string filePath = null;
+                saveFileDialog1.Filter = "Image files (JPeg, Gif, Bmp, etc.)|*.jpg;*.jpeg;*.gif;*.bmp;*.tif; *.tiff; *.png|" +
+                "JPeg files (*.jpg;*.jpeg)|*.jpg;*.jpeg |GIF files (*.gif)|*.gif |BMP files (*.b" +
+                "mp)|*.bmp|Tiff files (*.tif;*.tiff)|*.tif;*.tiff|Png files (*.png)| *.png |All f" +
+                "iles (*.*)|*.*";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = saveFileDialog1.FileName.ToString();
+                    bm.Save(filePath, ImageFormat.Jpeg);
+                }
+
+                bmpAll.Dispose();
+                isMouseClick = false;
+                this.Close();
+
+            }
+        }
+
+        //鼠标移动，画框或者拖动
+        private void ScreenBody_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseClick)
+            {
+                width = Math.Abs(MousePosition.X - x);
+                height = Math.Abs(MousePosition.Y - y);
+                g = CreateGraphics();
+                g.Clear(BackColor);
+                g.FillRectangle(Brushes.Navy, x < MousePosition.X ? x : MousePosition.X, y < MousePosition.Y ? y : MousePosition.Y, width + 1, height + 1);
+            }
         }
     }
 }
