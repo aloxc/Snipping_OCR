@@ -158,9 +158,18 @@ namespace Snipping_OCR
                 var txt = "";
                 if (ocrResult.TextBlocks.Count > 0)
                 {
-                    foreach (var item in ocrResult.TextBlocks)
+                    List<TextBlock> list = ocrResult.TextBlocks;
+                    if(list.Count == 1)
                     {
-                        txt += item.Text + "\r\n";
+                        txt = list[0].Text;
+                    }
+                    else
+                    {
+                        for (int i = 0; i<list.Count - 1;i++ )
+                        {
+                            txt += list[i].Text + "\r\n";
+                        }
+                        txt += list[list.Count -1];
                     }
                 }
                 this.BeginInvoke(new Action(() =>
