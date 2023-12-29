@@ -201,11 +201,6 @@ namespace Snipping_OCR
             ClipboardOCR();
         }
 
-        private void ÏÔÊ¾ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //WindowsAPI.ShowWindow(this.Handle, 9);
-        }
-
         private void ¿ªÊ¼½ØÍ¼ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StartCapture();

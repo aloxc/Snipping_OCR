@@ -28,87 +28,74 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.iconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.开始截图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.识别剪贴板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.退出软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iconMenu.SuspendLayout();
-            this.SuspendLayout();
-          
+            notifyIcon = new NotifyIcon(components);
+            iconMenu = new ContextMenuStrip(components);
+            开始截图ToolStripMenuItem = new ToolStripMenuItem();
+            识别剪贴板ToolStripMenuItem = new ToolStripMenuItem();
+            退出软件ToolStripMenuItem = new ToolStripMenuItem();
+            iconMenu.SuspendLayout();
+            SuspendLayout();
             // 
             // notifyIcon
             // 
-            this.notifyIcon.ContextMenuStrip = this.iconMenu;
-            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = "截图 OCR";
-            this.notifyIcon.Visible = true;
-            this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
+            notifyIcon.ContextMenuStrip = iconMenu;
+            notifyIcon.Icon = (Icon)resources.GetObject("notifyIcon.Icon");
+            notifyIcon.Text = "截图 OCR";
+            notifyIcon.Visible = true;
+            notifyIcon.DoubleClick += notifyIcon_DoubleClick;
             // 
             // iconMenu
             // 
-            this.iconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.显示ToolStripMenuItem,
-            this.开始截图ToolStripMenuItem,
-            this.识别剪贴板ToolStripMenuItem,
-            this.退出软件ToolStripMenuItem});
-            this.iconMenu.Name = "iconMenu";
-            this.iconMenu.Size = new System.Drawing.Size(137, 92);
-            // 
-            // 显示ToolStripMenuItem
-            // 
-            this.显示ToolStripMenuItem.Name = "显示ToolStripMenuItem";
-            this.显示ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.显示ToolStripMenuItem.Text = "显示界面";
-            this.显示ToolStripMenuItem.Click += new System.EventHandler(this.显示ToolStripMenuItem_Click);
+            iconMenu.ImageScalingSize = new Size(24, 24);
+            iconMenu.Items.AddRange(new ToolStripItem[] { 开始截图ToolStripMenuItem, 识别剪贴板ToolStripMenuItem, 退出软件ToolStripMenuItem });
+            iconMenu.Name = "iconMenu";
+            iconMenu.Size = new Size(171, 124);
+
             // 
             // 开始截图ToolStripMenuItem
             // 
-            this.开始截图ToolStripMenuItem.Name = "开始截图ToolStripMenuItem";
-            this.开始截图ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.开始截图ToolStripMenuItem.Text = "开始截图";
-            this.开始截图ToolStripMenuItem.Click += new System.EventHandler(this.开始截图ToolStripMenuItem_Click);
+            开始截图ToolStripMenuItem.Name = "开始截图ToolStripMenuItem";
+            开始截图ToolStripMenuItem.Size = new Size(170, 30);
+            开始截图ToolStripMenuItem.Text = "开始截图";
+            开始截图ToolStripMenuItem.Click += 开始截图ToolStripMenuItem_Click;
             // 
             // 识别剪贴板ToolStripMenuItem
             // 
-            this.识别剪贴板ToolStripMenuItem.Name = "识别剪贴板ToolStripMenuItem";
-            this.识别剪贴板ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.识别剪贴板ToolStripMenuItem.Text = "识别剪贴板";
-            this.识别剪贴板ToolStripMenuItem.Click += new System.EventHandler(this.识别剪贴板ToolStripMenuItem_Click);
+            识别剪贴板ToolStripMenuItem.Name = "识别剪贴板ToolStripMenuItem";
+            识别剪贴板ToolStripMenuItem.Size = new Size(170, 30);
+            识别剪贴板ToolStripMenuItem.Text = "识别剪贴板";
+            识别剪贴板ToolStripMenuItem.Click += 识别剪贴板ToolStripMenuItem_Click;
             // 
             // 退出软件ToolStripMenuItem
             // 
-            this.退出软件ToolStripMenuItem.Name = "退出软件ToolStripMenuItem";
-            this.退出软件ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.退出软件ToolStripMenuItem.Text = "退出软件";
-            this.退出软件ToolStripMenuItem.Click += new System.EventHandler(this.退出软件ToolStripMenuItem_Click);
+            退出软件ToolStripMenuItem.Name = "退出软件ToolStripMenuItem";
+            退出软件ToolStripMenuItem.Size = new Size(170, 30);
+            退出软件ToolStripMenuItem.Text = "退出软件";
+            退出软件ToolStripMenuItem.Click += 退出软件ToolStripMenuItem_Click;
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 461);
-            this.MinimumSize = new System.Drawing.Size(800, 500);
-            this.Name = "Main";
-            this.ShowInTaskbar = false;
-            this.Text = "Snipping OCR";
-            this.TopMost = true;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
-            this.Load += new System.EventHandler(this.Main_Load);
-            this.SizeChanged += new System.EventHandler(this.Main_SizeChanged);
-            this.iconMenu.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(11F, 24F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(180, 0);
+            Margin = new Padding(5, 4, 5, 4);
+            Name = "Main";
+            ShowInTaskbar = false;
+            Text = "Snipping OCR";
+            TopMost = true;
+            FormClosed += Main_FormClosed;
+            Load += Main_Load;
+            SizeChanged += Main_SizeChanged;
+            iconMenu.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
 
         private NotifyIcon notifyIcon;
         private ContextMenuStrip iconMenu;
-        private ToolStripMenuItem 显示ToolStripMenuItem;
         private ToolStripMenuItem 识别剪贴板ToolStripMenuItem;
         private ToolStripMenuItem 退出软件ToolStripMenuItem;
         private ToolStripMenuItem 开始截图ToolStripMenuItem;
