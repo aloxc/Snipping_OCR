@@ -71,10 +71,8 @@ namespace Snipping_OCR
         /// </summary>
         private void StartCapture()
         {
-            // 隐藏
-            this.WindowState = FormWindowState.Minimized;
-            this.Hide();
-
+            //如果需要恢复代码，需要恢复下面被注释掉的代码
+            /*
             var psi = new ProcessStartInfo()
             {
                 UseShellExecute = true,
@@ -85,16 +83,8 @@ namespace Snipping_OCR
             var snippingToolProcess = Process.GetProcessesByName("ScreenClippingHost")[0];
             snippingToolProcess.EnableRaisingEvents = true;
             snippingToolProcess.Exited += SnippingToolProcess_Exited;
-
-            /*
-            Process snippingToolProcess = new Process()
-            {
-                StartInfo = new ProcessStartInfo("C:\\Windows\\system32\\SnippingTool.exe", "/clip"),
-                EnableRaisingEvents = true,
-            };
-            snippingToolProcess.Exited += SnippingToolProcess_Exited;
-            snippingToolProcess.Start();
             */
+          
         }
 
         /// <summary>
