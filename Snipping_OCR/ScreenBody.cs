@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PaddleOCRSharp;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Snipping_OCR
 {
@@ -280,9 +281,7 @@ namespace Snipping_OCR
                     txt += item.Text + "\r\n";
                 }
             }
-            Clipboard.SetText(txt);
-
-  
+            Clipboard.SetDataObject(txt, true, 10, 200);
             ocrImage.Dispose();
             bmpAll.Dispose();
             g.Dispose();
