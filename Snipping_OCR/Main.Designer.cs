@@ -33,7 +33,6 @@
             notifyIcon = new NotifyIcon(components);
             iconMenu = new ContextMenuStrip(components);
             开始截图ToolStripMenuItem = new ToolStripMenuItem();
-            识别剪贴板ToolStripMenuItem = new ToolStripMenuItem();
             退出软件ToolStripMenuItem = new ToolStripMenuItem();
             iconMenu.SuspendLayout();
             SuspendLayout();
@@ -49,7 +48,7 @@
             // iconMenu
             // 
             iconMenu.ImageScalingSize = new Size(24, 24);
-            iconMenu.Items.AddRange(new ToolStripItem[] { 开始截图ToolStripMenuItem, 识别剪贴板ToolStripMenuItem, 退出软件ToolStripMenuItem });
+            iconMenu.Items.AddRange(new ToolStripItem[] { 开始截图ToolStripMenuItem, 退出软件ToolStripMenuItem });
             iconMenu.Name = "iconMenu";
             iconMenu.Size = new Size(171, 124);
 
@@ -60,13 +59,6 @@
             开始截图ToolStripMenuItem.Size = new Size(170, 30);
             开始截图ToolStripMenuItem.Text = "开始截图";
             开始截图ToolStripMenuItem.Click += 开始截图ToolStripMenuItem_Click;
-            // 
-            // 识别剪贴板ToolStripMenuItem
-            // 
-            识别剪贴板ToolStripMenuItem.Name = "识别剪贴板ToolStripMenuItem";
-            识别剪贴板ToolStripMenuItem.Size = new Size(170, 30);
-            识别剪贴板ToolStripMenuItem.Text = "识别剪贴板";
-            识别剪贴板ToolStripMenuItem.Click += 识别剪贴板ToolStripMenuItem_Click;
             // 
             // 退出软件ToolStripMenuItem
             // 
@@ -96,7 +88,6 @@
 
         private NotifyIcon notifyIcon;
         private ContextMenuStrip iconMenu;
-        private ToolStripMenuItem 识别剪贴板ToolStripMenuItem;
         private ToolStripMenuItem 退出软件ToolStripMenuItem;
         private ToolStripMenuItem 开始截图ToolStripMenuItem;
     }

@@ -205,11 +205,6 @@ namespace Snipping_OCR
             Environment.Exit(0);
         }
 
-        private void 识别剪贴板ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ClipboardOCR();
-        }
-
         private void 开始截图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StartCapture();
